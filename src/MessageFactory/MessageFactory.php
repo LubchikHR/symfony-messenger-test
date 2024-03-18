@@ -7,10 +7,10 @@ namespace App\MessageFactory;
 use App\Message\AsyncMessageInterface;
 use App\Message\SomeMessage;
 
-class MessageFactory implements MessageFactoryInterface
+class MessageFactory
 {
-    public function createSomeMessage(string $content): AsyncMessageInterface
+    public function createSomeMessage(?string $content): AsyncMessageInterface
     {
-        return (new SomeMessage($content));
+        return new SomeMessage($content);
     }
 }

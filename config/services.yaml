@@ -17,8 +17,22 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/{Entity, Repository}/'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    privatbank_provider:
+        class: App\Gateway\Provider\PrivatbankProvider
+        calls:
+            - setUrl: ['%env(string:PRIVATBANK_API_URL)%']
+
+    monobank_provider:
+        class: App\Gateway\Provider\MonobankProvider
+        calls:
+            - setUrl: ['%env(string:MONOBANK_API_URL)%']
+
+    App\Command\CurrencyExchangeCommand:
+        arguments:
+            $providers: ['@privatbank_provider', '@monobank_provider']
