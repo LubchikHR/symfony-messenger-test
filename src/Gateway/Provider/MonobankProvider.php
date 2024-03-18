@@ -35,11 +35,10 @@ class MonobankProvider extends AbstractBankProvider implements BankProviderInter
         if (!is_null($apiResponse)) {
             foreach ($apiResponse as $currency) {
                 if (isset(self::SUPPORTED_CURRENCIES[$currency['currencyCodeA']])) {
-                    $currencyName = self::SUPPORTED_CURRENCIES[$currency['currencyCodeA']];
-                    $result[$currencyName] = new CurrencyValueDTO(
+                    $result[] = new CurrencyValueDTO(
                         self::BANK,
-                        $currencyName,
-                        self::UAH,
+                        self::SUPPORTED_CURRENCIES[$currency['currencyCodeA']],
+                        self::SUPPORTED_CURRENCIES[$currency['currencyCodeB']],
                         (string) $currency['rateBuy'],
                         (string) $currency['rateSell'],
                     );
