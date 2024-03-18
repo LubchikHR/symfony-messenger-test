@@ -3,8 +3,9 @@
 
 ##### Need to be installed php >= 7.4 and symfony >= 5.4. Then Run next commands:  
 1. `composer install`
-2. `php bin/console doctrine:migrations:migrate --no-interaction`
-3. `php bin/console app:currency-exchange -vv`
+2. `php bin/console doctrine:database:create`
+3. `php bin/console doctrine:migrations:migrate --no-interaction`
+4. `php bin/console app:currency-exchange -vv`
 
 ##### Tests:
 `php bin/phpunit`
